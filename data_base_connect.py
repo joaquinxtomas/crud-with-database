@@ -21,14 +21,26 @@ def crear_usuario(nombre: str,email: str):
     conn.commit()
     print("Usuario agregado con exito!")
 
+def modificar_usuario(id, nombre, email):
+    cursor.execute("""
+                   UPDATE usuarios
+                   SET nombre = ?, email = ?
+                   WHERE id = ?
+                   """, (nombre,email, id))
+    conn.commit()
+    print("Usuario actualizado")
+
 def ver_usuario(id):
     cursor.execute("""
                     SELECT * FROM usuarios
                     WHERE id = ?
                    """, (id,))
     usuario = cursor.fetchone()
-    print(f"""Mostrando el usuario numero: {usuario[0]}\nnombre: {usuario[1]}, email: {usuario[2]}
+    if(usuario):
+        print(f"""Mostrando el usuario numero: {usuario[0]}\nnombre: {usuario[1]}, email: {usuario[2]}
           """)
+    else:
+        print("USUARIO NO ENCONTRADO")
     
 def eliminar_usuario(id):
     cursor.execute("""
@@ -38,6 +50,4 @@ def eliminar_usuario(id):
     conn.commit()
     print("Usuario eliminado exitosamente.")
     
-crear_usuario("jorge", "jorge@gmail.com")
-ver_usuario(2)
-    
+modificar_usuario(2, "alberto","fernandez@gmail.com")
