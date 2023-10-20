@@ -6,8 +6,10 @@ while True:
         1 - Crear un usuario
         2 - Modificar un usuario
         3 - Ver un usuario
-        4 - Eliminar un usuario
-        5 - Salir
+        4 - Listar todos los usuarios
+        5 - Buscar un usuario por su nombre o email
+        6 - Eliminar un usuario
+        7 - Salir
       """)
     if dec == "1":
         name = input("Ingrese su nombre: ")
@@ -22,9 +24,17 @@ while True:
         id = input("Ingrese el id del usuario a visualizar: ")
         dbc.ver_usuario(id)
     elif dec == "4":
+        dbc.listar_usuarios()
+    elif dec == "5":
+        query = input("Ingrese el nombre o el email de la persona: ")
+        if(len(query) > 0):
+            dbc.busqueda_usuario(query)
+        else:
+            print("No ha colocado la cantidad minima de caracteres de busqueda.")
+    elif dec == "6":
         id = input("Ingrese el id del usuario a eliminar: ")
         dbc.eliminar_usuario(id)
-    elif dec == "5":
+    elif dec == "7":
         break
 
         
